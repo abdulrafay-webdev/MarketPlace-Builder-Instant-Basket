@@ -4,7 +4,8 @@ import category from './category'
 import order from './order'
 import rider from './rider'
 import customer from './customer'
+import area from './area'
 
 export const schema: { types: SchemaTypeDefinition[] } = {
-  types: [product,category,order,rider,customer],
+  types: [product,category,order,rider,customer,area],
 }
