@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@clerk/nextjs": "^6.9.14",
     "@sanity/image-url": "^1.1.0",
     "@sanity/vision": "^3.70.0",
     "next": "15.1.5",
@@ -16,13 +17,15 @@
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "sanity": "^3.70.0",
-    "styled-components": "^6.1.14"
+    "styled-components": "^6.1.14",
+    "swr": "^2.3.0"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "daisyui": "^4.12.23",
     "eslint": "^9",
     "eslint-config-next": "15.1.5",
     "postcss": "^8",

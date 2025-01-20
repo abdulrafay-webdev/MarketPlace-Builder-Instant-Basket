@@ -37,7 +37,7 @@ export default {
     { name: "paymentId", type: "string", title: "Stripe Payment ID" },
     {
       name: "orderId",
-      type: "any",
+      type: "string",
       title: "Order ID",
       readOnly: true, // Make it read-only so users cannot edit it
       initialValue: () => uuidv4(), // Automatically generates a unique ID

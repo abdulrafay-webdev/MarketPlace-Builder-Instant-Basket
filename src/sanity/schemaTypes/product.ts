@@ -7,6 +7,7 @@ export const product = {
   fields: [
     { name: "name", type: "string", title: "Product Name" },
     { name: "description", type: "text", title: "Description" },
+    { name: "quantity", type: "string", title: "Quantity" },
     { name: "price", type: "number", title: "Price" },
     {
       name: "category",
