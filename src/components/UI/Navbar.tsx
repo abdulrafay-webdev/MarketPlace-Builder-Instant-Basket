@@ -1,6 +1,7 @@
 'use client'
 import React, { useState } from "react";
 import { useUser, SignInButton, SignOutButton, UserButton } from "@clerk/nextjs"; // Clerk imports
+import Link from "next/link";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -12,13 +13,15 @@ const Navbar = () => {
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <div className="flex items-center">
+            <Link href={'/'}>
             <h1 className="sm:text-2xl text-lg font-bold">InstantBasket</h1>
+            </Link>
           </div>
 
           {/* Menu Items for Desktop */}
           <div className="hidden md:flex items-center space-x-4">
-            <a href="/" className="hover:text-yellow-300 transition">
-              Home
+            <a href="/product" className="hover:text-yellow-300 transition">
+              All Product
             </a>
             <a href="/category" className="hover:text-yellow-300 transition">
               Categories

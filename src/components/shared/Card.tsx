@@ -9,7 +9,8 @@ function Card(props: {
   title: string;
   price: number;
   cart: string;
-  quantity:string
+  quantity:string;
+  category:string;
 }) {
 
   const domePrice:any = (props.price * 1.2).toFixed(2);
@@ -24,10 +25,10 @@ function Card(props: {
             alt="Product"
             width={500}
             height={500}
-            className="w-full aspect-square object-cover rounded-t-lg"
+            className="sm:max-w-xs max-w-[100%] aspect-square object-cover rounded-t-lg"
           />
           <span className="absolute top-2 left-2 bg-red-600 text-white text-xs px-2 py-1 rounded-md">
-            -10%
+            -20%
           </span>
         </Link>
       </div>
@@ -35,9 +36,15 @@ function Card(props: {
       {/* Product Details */}
       <div className="p-4">
         <Link href={`/product/${props.slug}`}>
+        <span className="text-sm text-gray-500">
+              {props.category}
+            </span>
           <h3 className="sm:text-lg text-sm font-semibold text-gray-800 text-ellipsis line-clamp-2">
             {props.title}
           </h3>
+          <span className="text-sm text-gray-700">
+              ({props.quantity})
+            </span>
           <div className="flex items-center mt-2 space-x-2">
             <span className="sm:text-lg text-sm font-bold text-indigo-600">
               PKR {props.price} /-

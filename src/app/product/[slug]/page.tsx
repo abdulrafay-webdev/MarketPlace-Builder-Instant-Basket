@@ -1,7 +1,7 @@
-import { client } from '@/sanity/lib/client';
 import Image from 'next/image';
 import React from 'react'
 import SingleProduct from "@/components/UI/SingleProduct";
+import { client } from '../../../../sanity/lib/client';
 
 
 export interface PageProps {
@@ -41,7 +41,7 @@ export interface PageProps {
 
 
 
-<SingleProduct key={index} price={product.price} title={product.name} description={product.description} image={product.ProductImage} />
+<SingleProduct key={index} category={product.categoryName} price={product.price} title={product.name} description={product.description} image={product.ProductImage} />
 
                 // </div>
               ))}

@@ -2,8 +2,8 @@ import React from "react";
 import img1 from "../../../public/images/golden light.jpg";
 import img2 from "../../../public/images/golden light 2.jpg";
 import Image from "next/image";
-import { client } from "@/sanity/lib/client";
 import Link from "next/link";
+import { client } from "../../../sanity/lib/client";
 
 async function Categories() {
 
