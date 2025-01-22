@@ -5,14 +5,18 @@ import { v4 as uuidv4 } from "uuid";
 import React, { useEffect, useState } from "react";
 import { client } from "../../../sanity/lib/client";
 import { toast } from "react-toastify";
-import { set } from "sanity";
 
 const DELIVERY_CHARGES = 90; // Fixed delivery charges
+type Area = {
+  _id: string; // or number, depending on your schema
+  AreaName: string;
+  block: string;
+};
 
 function CheckoutPage() {
   const [items, setItems] = useState<iProduct[]>([]);
   const [totalPrice, setTotalPrice] = useState(0);
-  const [areas, setAreas] = useState([]);
+  const [areas, setAreas] = useState<Area[]>([]);
   const [selectedOption, setSelectedOption] = useState("");
   const [formData, setFormData] = useState({
     customerName: "",
@@ -32,7 +36,7 @@ function CheckoutPage() {
 
     // Calculate total price
     const subtotal = parsedItems.reduce(
-      (sum, item) => sum + item.price * (item.quantity || 1),
+      (sum, item) => sum + Number(item.price) * Number(item.quantity || 1),
       0
     );
     setTotalPrice(subtotal + DELIVERY_CHARGES);
@@ -127,16 +131,16 @@ function CheckoutPage() {
                 <span>Total</span>
               </div>
               {items.map((item) => (
-                <div
-                  key={item._id}
-                  className="grid grid-cols-4 gap-4 items-center border-b py-2"
-                >
-                  <span>{item.name}</span>
-                  <span>Rs. {item.price}</span>
-                  <span>{item.quantity || 1}</span>
-                  <span>Rs. {item.price * (item.quantity || 1)}</span>
-                </div>
-              ))}
+  <div
+    key={item._id}
+    className="grid grid-cols-4 gap-4 items-center border-b py-2"
+  >
+    <span>{item.name}</span>
+    <span>Rs. {item.price}</span>
+    <span>{item.quantity || 1}</span>
+    <span>Rs. {Number(item.price) * Number(item.quantity || 1)}</span>
+  </div>
+))}
               <div className="mt-4 text-right font-bold">
                 <p>Delivery Charges: Rs. {DELIVERY_CHARGES}</p>
                 <p>Total Price: Rs. {totalPrice}</p>

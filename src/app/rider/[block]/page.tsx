@@ -5,13 +5,34 @@ import { client } from "../../../../sanity/lib/client";
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
 
+// Define types for Order, Product, and the component's props
+interface Product {
+  _id: string;
+  name: string;
+  price: number;
+  imageUrl: string;
+}
+
+interface Order {
+  orderId: string;
+  customerName: string;
+  customerContact: string;
+  customerAddress: string;
+  deliveryNote: string;
+  TotalPrice: number;
+  paymentId: string;
+  status: string;
+  assignedRider: string;
+  products: Product[];
+}
+
 export interface PageProps {
   params: Promise<{
     block: string;
   }>;
 }
 
-async function fetchOrders(block: string) {
+async function fetchOrders(block: string): Promise<Order[]> {
   try {
     const orders = await client.fetch(
       `*[_type == "order" && Area->block == $block]{
@@ -20,7 +41,7 @@ async function fetchOrders(block: string) {
         customerContact,
         customerAddress,
         deliveryNote,
-          TotalPrice,
+        TotalPrice,
         paymentId,
         status,
         "assignedRider": assignedRider->name,
@@ -41,7 +62,7 @@ async function fetchOrders(block: string) {
   }
 }
 
-async function updateOrderStatus(orderId: string, newStatus: string) {
+async function updateOrderStatus(orderId: string, newStatus: string): Promise<void> {
   try {
     const document = await client.fetch(
       `*[_type == "order" && orderId == $orderId][0]{_id}`,
@@ -60,7 +81,7 @@ async function updateOrderStatus(orderId: string, newStatus: string) {
       .commit();
 
     console.log('Document after update:', updatedDocument);
-    toast.success(`Order  ${newStatus}`);
+    toast.success(`Order ${newStatus}`);
     // Reload the page after update
     window.location.reload();
   } catch (error) {
@@ -70,7 +91,7 @@ async function updateOrderStatus(orderId: string, newStatus: string) {
 }
 
 const Page = ({ params }: PageProps) => {
-  const [orders, setOrders] = useState<any[]>([]);
+  const [orders, setOrders] = useState<Order[]>([]);
   const [block, setBlock] = useState<string>("");
 
   useEffect(() => {
@@ -93,7 +114,7 @@ const Page = ({ params }: PageProps) => {
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
         {orders.length > 0 ? (
-          orders.map((item: any, i: number) => (
+          orders.map((item: Order, i: number) => (
             <div
               key={i}
               className="bg-white rounded-lg shadow-2xl p-5 flex flex-col justify-between"
@@ -109,7 +130,7 @@ const Page = ({ params }: PageProps) => {
               <div className="mt-3">
                 <h3 className="font-semibold text-gray-800">Products:</h3>
                 <ul className="list-disc pl-5">
-                  {item.products.map((product: any) => (
+                  {item.products.map((product: Product) => (
                     <div key={product._id} className="flex items-center gap-5">
                       <Image  
                         src={product.imageUrl} 
@@ -117,9 +138,9 @@ const Page = ({ params }: PageProps) => {
                         width={100} 
                         height={100} 
                         className="rounded-lg"/>
-                    <li className="text-black font-semibold">
-                      {product.name} - PKR {product.price}/-
-                    </li>
+                      <li className="text-black font-semibold">
+                        {product.name} - PKR {product.price}/-
+                      </li>
                     </div>
                   ))}
                 </ul>

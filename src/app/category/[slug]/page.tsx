@@ -1,8 +1,15 @@
-import Card from "@/components/shared/Card";
 import React from "react";
 import { client } from "../../../../sanity/lib/client";
 import iProduct from "@/types/product";
 import ProductList from "@/components/shared/ProductList";
+
+// Define types for Category and Product
+interface Category {
+  categoryName: string;
+  slug: string;
+  CategoryImage: string;
+  description: string;
+}
 
 export interface PageProps {
   params: Promise<{
@@ -14,32 +21,35 @@ async function page({ params }: PageProps) {
   const resolvedParams = await params; // Await the promise
   const { slug } = resolvedParams;
 
-  const category =
-    await client.fetch(`*[_type == "category" && slug.current == "${slug}"]{
-  categoryName,
- "slug":slug.current,
-    "CategoryImage": image.asset->url,
-    description
-}`);
+  // Fetch Category data with correct types
+  const category: Category[] = await client.fetch(
+    `*[_type == "category" && slug.current == "${slug}"]{
+      categoryName,
+      "slug": slug.current,
+      "CategoryImage": image.asset->url,
+      description
+    }`
+  );
 
-  const product =
-    await client.fetch(`*[_type == "product" && category->slug.current == "${slug}"] {
-  name,
-  description,
-  price,
-  "categoryName": category->categoryName,
-  sku,
-  "slug": slug.current,
-  "ProductImage": image.asset->url,
-  quantity,
-  _id
-}`);
-  const products: iProduct[] = product; // `data` ko directly array assume kar rahe hain
+  // Fetch Product data with correct types
+  const product: iProduct[] = await client.fetch(
+    `*[_type == "product" && category->slug.current == "${slug}"] {
+      name,
+      description,
+      price,
+      "categoryName": category->categoryName,
+      sku,
+      "slug": slug.current,
+      "ProductImage": image.asset->url,
+      quantity,
+      _id
+    }`
+  );
 
   return (
     <div className="min-h-[80vh]">
-      {/* ui design  */}
-      {category.map((item: any, i: any) => (
+      {/* ui design */}
+      {category.map((item: Category, i: number) => (
         <div
           key={i}
           className="hero max-h-[40vh] min-h-[20vh]"
@@ -57,9 +67,9 @@ async function page({ params }: PageProps) {
         </div>
       ))}
 
-      {/* products category wise  */}
+      {/* products category wise */}
       <div>
-          <ProductList products={products} />
+        <ProductList products={product} />
       </div>
     </div>
   );

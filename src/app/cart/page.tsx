@@ -1,14 +1,11 @@
-
 "use client";
 import React, { useEffect, useState } from "react";
 import iProduct from "@/types/product";
-import Router, { useRouter } from "next/navigation";
-
+import { useRouter } from "next/navigation";
+import Image from "next/image";
 
 function CartPage() {
-
-  const router = useRouter()
-
+  const router = useRouter();
   const [cartItems, setCartItems] = useState<iProduct[]>([]);
 
   // Load cart items from localStorage
@@ -20,32 +17,47 @@ function CartPage() {
   }, []);
 
   // Update cart in localStorage
-  const updateCart = (updatedCart: iProduct[]) => { // Type annotation added
-    const cartObject = updatedCart.reduce((acc, item) => {
-      acc[item._id] = item;
-      return acc;
-    }, {} as Record<string, iProduct>); // Define a type for accumulator
+  const updateCart = (updatedCart: iProduct[]) => {
+    const cartObject = updatedCart.reduce(
+      (acc, item) => {
+        acc[item._id] = item;
+        return acc;
+      },
+      {} as Record<string, iProduct>
+    ); // Define a type for accumulator
     localStorage.setItem("cart", JSON.stringify(cartObject));
     setCartItems(updatedCart);
   };
 
   // Remove product from cart
-  const removeProduct = (productId: string) => { // Specify the type for productId
+  const removeProduct = (productId: string) => {
     const updatedCart = cartItems.filter((item) => item._id !== productId);
     updateCart(updatedCart);
   };
 
   // Update product quantity
-  const updateQuantity = (productId: string, quantity: number) => { // Specify types
+  // const updateQuantity = (productId: string, quantity: number) => {
+  //   const updatedCart = cartItems.map((item) =>
+  //     item._id === productId
+  //       ? { ...item, quantity:string( Math.max(1, quantity)) } // Ensure quantity is a number
+  //       : item
+  //   );
+  //   updateCart(updatedCart);
+  // };
+  const updateQuantity = (productId: string, quantity: number) => {
     const updatedCart = cartItems.map((item) =>
-      item._id === productId ? { ...item, quantity: Math.max(1, quantity) } : item
+      item._id === productId
+        ? { ...item, quantity: String(Math.max(1, quantity)) } // Use String() to convert to string
+        : item
     );
     updateCart(updatedCart);
   };
 
-  const calculateTotal = (): number => 
-    cartItems.reduce((total, item) => total + item.price * item.quantity, 0);
-
+  const calculateTotal = (): number =>
+    cartItems.reduce(
+      (total, item) => total + item.price * Number(item.quantity),
+      0
+    );
 
   return (
     <div className="min-h-screen bg-gray-100 p-6">
@@ -59,8 +71,11 @@ function CartPage() {
               {cartItems.map((item) => (
                 <div
                   key={item._id}
-                  className="flex items-center bg-white p-4 rounded-lg shadow-md mb-4">
-                  <img
+                  className="flex items-center bg-white p-4 rounded-lg shadow-md mb-4"
+                >
+                  <Image
+                    width={200}
+                    height={200}
                     src={item.ProductImage}
                     alt={item.name}
                     className="w-24 h-24 rounded object-cover"
@@ -70,28 +85,37 @@ function CartPage() {
                       {item.name}
                     </h2>
                     <p className="text-sm text-gray-500">{item.categoryName}</p>
-                    <p className="text-sm text-gray-600 mt-1">Price: PKR {item.price}</p>
+                    <p className="text-sm text-gray-600 mt-1">
+                      Price: PKR {item.price}
+                    </p>
                   </div>
                   <div className="flex items-center">
                     <button
                       className="px-3 py-1 bg-gray-200 rounded-l hover:bg-gray-300"
-                      onClick={() => updateQuantity(item._id, item.quantity - 1)}>
+                      onClick={() =>
+                        updateQuantity(item._id, Number(item.quantity) - 1)
+                      }
+                    >
                       -
                     </button>
                     <span className="px-4 py-1 border">{item.quantity}</span>
                     <button
                       className="px-3 py-1 bg-gray-200 rounded-r hover:bg-gray-300"
-                      onClick={() => updateQuantity(item._id, item.quantity + 1)}>
+                      onClick={() =>
+                        updateQuantity(item._id, Number(item.quantity) + 1)
+                      }
+                    >
                       +
                     </button>
                   </div>
                   <div className="ml-4 text-right">
                     <p className="text-sm text-gray-600">
-                      Subtotal: PKR {item.price * item.quantity}
+                      Subtotal: PKR {item.price * Number(item.quantity)}
                     </p>
                     <button
                       className="text-red-500 hover:underline text-sm mt-1"
-                      onClick={() => removeProduct(item._id)}>
+                      onClick={() => removeProduct(item._id)}
+                    >
                       Remove
                     </button>
                   </div>
@@ -99,10 +123,14 @@ function CartPage() {
               ))}
             </div>
             <div className="bg-white p-6 h-fit rounded-lg shadow-md">
-              <h2 className="text-lg font-semibold text-gray-800 mb-4">Order Summary</h2>
+              <h2 className="text-lg font-semibold text-gray-800 mb-4">
+                Order Summary
+              </h2>
               <div className="flex justify-between mb-2">
                 <span className="text-sm text-gray-600">Items:</span>
-                <span className="text-sm text-gray-800">{cartItems.length}</span>
+                <span className="text-sm text-gray-800">
+                  {cartItems.length}
+                </span>
               </div>
               <div className="flex justify-between mb-2">
                 <span className="text-sm text-gray-600">Delivery:</span>
@@ -110,10 +138,14 @@ function CartPage() {
               </div>
               <div className="flex justify-between mb-2">
                 <span className="text-sm text-gray-600">Total:</span>
-                <span className="text-lg font-bold text-gray-800">PKR {calculateTotal() + 90 }</span>
+                <span className="text-lg font-bold text-gray-800">
+                  PKR {calculateTotal() + 90}
+                </span>
               </div>
-              <button onClick={()=>(router.push('/checkout'))}
-                className="w-full bg-indigo-600 text-white py-2 px-4 rounded-lg hover:bg-indigo-700 mt-4">
+              <button
+                onClick={() => router.push("/checkout")}
+                className="w-full bg-indigo-600 text-white py-2 px-4 rounded-lg hover:bg-indigo-700 mt-4"
+              >
                 Proceed to Checkout
               </button>
             </div>
@@ -129,6 +161,3 @@ function CartPage() {
 }
 
 export default CartPage;
-
-
-

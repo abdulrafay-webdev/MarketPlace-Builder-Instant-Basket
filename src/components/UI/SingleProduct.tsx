@@ -45,7 +45,7 @@ function SingleProduct({ products }: ProductListProps) {
   return (
   <div className="container px-5 lg:py-24 sm:py-10 mx-auto">
     {products.map((product: iProduct) => {
-    const domePrice:any = (product.price * 1.2).toFixed(2);
+    const domePrice:string = (product.price * 1.2).toFixed(2);
             return (
     <div key={product._id} className="lg:w-4/5 gap-3  justify-center mx-auto  flex flex-wrap">
     {/* image  */}

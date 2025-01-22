@@ -1,4 +1,3 @@
-import Image from 'next/image';
 import React from 'react'
 import SingleProduct from "@/components/UI/SingleProduct";
 import { client } from '../../../../sanity/lib/client';

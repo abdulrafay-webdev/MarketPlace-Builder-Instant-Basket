@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import React from 'react'
 
 function Hero() {
@@ -14,7 +15,9 @@ function Hero() {
       <p className="mb-5">
       InstantBasket offers seamless, real-time shopping with a diverse range of products, delivering convenience, affordability, and exceptional service for every customer
       </p>
-      <button className="btn btn-primary">Get Started</button>
+      <Link href="/product">
+      <button className="btn btn-primary">Buy Now</button>
+      </Link>
     </div>
   </div>
 </div>

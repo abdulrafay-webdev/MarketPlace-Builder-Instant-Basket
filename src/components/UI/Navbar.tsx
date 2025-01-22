@@ -119,10 +119,13 @@ const Navbar = () => {
 
       {/* Mobile Menu */}
       {isOpen && (
-        <div className="md:hidden bg-cyan-600">
+        <div className="lg:hidden bg-cyan-600">
           <div className="px-2 pt-2 pb-3 space-y-1">
             <Link href="/" className="block px-3 py-2 rounded-md text-base font-medium hover:bg-green-700">
               Home
+            </Link>
+            <Link href="/product" className="block px-3 py-2 rounded-md text-base font-medium hover:bg-green-700">
+              All Products
             </Link>
             <Link href="/cart" className="block px-3 py-2 rounded-md text-base font-medium hover:bg-green-700">
               Cart
