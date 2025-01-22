@@ -2,33 +2,43 @@
 import iProduct from "@/types/product";
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
+import React, { useState } from "react";
 import { toast } from "react-toastify";
-import { json } from "stream/consumers";
+import "react-toastify/dist/ReactToastify.css";
+import { useRouter } from "next/navigation";
 
 interface ProductListProps {
   products: iProduct[]; // Ensure products is an array of iProduct
 }
 
 function ProductList({ products }: ProductListProps) {
-  // const domePrice:any = (products.price * 1.2).toFixed(2);
+  const [showCartButton, setShowCartButton] = useState(false);
+  const router = useRouter();
 
-  const handleclick = (product: iProduct) => {
-    // console.log(product)
+  const handleClick = (product: iProduct) => {
     const cart = JSON.parse(localStorage.getItem("cart") || "{}");
+
     if (cart[product.name]) {
       cart[product.name] = {
         ...cart[product.name],
         quantity: cart[product.name].quantity + 1,
       };
     } else {
-      cart[product.name] = {...product, quantity: 1};
+      cart[product.name] = { ...product, quantity: 1 };
     }
 
     localStorage.setItem("cart", JSON.stringify(cart));
+    setShowCartButton(true);
 
-    // const jsonCart = JSON.stringify(product); 
-    // localStorage.setItem('cart', jsonCart);
+    // Show toast notification
+    toast.success(`${product.name} added to cart!`, {
+      position: "top-right",
+      autoClose: 2000,
+      hideProgressBar: true,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+    });
   };
 
   return (
@@ -69,14 +79,10 @@ function ProductList({ products }: ProductListProps) {
                   <span className="sm:text-lg text-sm font-bold text-indigo-600">
                     PKR {product.price} /-
                   </span>
-                  <span className="text-sm text-gray-500 line-through">
-                    {/* {domePrice } */}
-                  </span>
                 </div>
               </Link>
-              <div className="flex items-center mt-2"></div>
               <button
-                onClick={() => handleclick(product)}
+                onClick={() => handleClick(product)}
                 className="w-full mt-4 px-4 py-2 text-sm font-semibold text-white bg-indigo-600 rounded-md hover:bg-indigo-700 transition-colors"
               >
                 Add to Cart
@@ -85,6 +91,16 @@ function ProductList({ products }: ProductListProps) {
           </div>
         );
       })}
+      {showCartButton && (
+        <div className="fixed bottom-4 right-4">
+          <button
+            onClick={() => router.push("/cart")}
+            className="px-6 py-3 text-sm font-semibold text-white bg-green-600 rounded-md shadow-lg hover:bg-green-700 transition-colors"
+          >
+            View Cart
+          </button>
+        </div>
+      )}
     </div>
   );
 }
