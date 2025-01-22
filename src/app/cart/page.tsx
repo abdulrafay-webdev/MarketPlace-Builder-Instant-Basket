@@ -2,8 +2,13 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import iProduct from "@/types/product";
+import Router, { useRouter } from "next/navigation";
+
 
 function CartPage() {
+
+  const router = useRouter()
+
   const [cartItems, setCartItems] = useState<iProduct[]>([]);
 
   // Load cart items from localStorage
@@ -107,7 +112,7 @@ function CartPage() {
                 <span className="text-sm text-gray-600">Total:</span>
                 <span className="text-lg font-bold text-gray-800">PKR {calculateTotal() + 90 }</span>
               </div>
-              <button
+              <button onClick={()=>(router.push('/checkout'))}
                 className="w-full bg-indigo-600 text-white py-2 px-4 rounded-lg hover:bg-indigo-700 mt-4">
                 Proceed to Checkout
               </button>

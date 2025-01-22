@@ -5,6 +5,7 @@ const nextConfig: NextConfig = {
   images: {
     domains: ['cdn.sanity.io'], // Sanity CDN domain
   },
+  reactStrictMode: true,
 };
 
 export default nextConfig;
