@@ -6,7 +6,8 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "postinstall": "npx next-swc@latest"
   },
   "dependencies": {
     "@clerk/nextjs": "^6.9.14",
@@ -20,7 +21,7 @@
     "clsx": "^2.1.1",
     "embla-carousel-react": "^8.5.2",
     "lucide-react": "^0.473.0",
-    "next": "^15.1.5",
+    "next": "^15.1.6",
     "next-sanity": "^9.8.38",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
