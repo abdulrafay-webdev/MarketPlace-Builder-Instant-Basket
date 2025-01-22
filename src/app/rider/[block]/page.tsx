@@ -20,6 +20,7 @@ async function fetchOrders(block: string) {
         customerContact,
         customerAddress,
         deliveryNote,
+          TotalPrice,
         paymentId,
         status,
         "assignedRider": assignedRider->name,
@@ -102,7 +103,7 @@ const Page = ({ params }: PageProps) => {
               <p className="text-gray-700"><b>Address:</b> {item.customerAddress}</p>
               <p className="text-gray-700"><b>Contact:</b> {item.customerContact}</p>
               <p className="text-gray-700"><b>Delivery Note:</b> {item.deliveryNote}</p>
-              <p className="text-gray-700"><b>Assigned Rider:</b> {item.assignedRider}</p>
+              <p className="text-gray-700"><b>Total Price:</b> {item.TotalPrice}</p>
               <p className="text-gray-700"><b>Status: </b>{item.status}</p>
 
               <div className="mt-3">

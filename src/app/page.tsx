@@ -3,6 +3,7 @@ import Hero from "@/components/UI/Hero";
 import { client } from "../../sanity/lib/client";
 import ProductList from "@/components/shared/ProductList";
 import iProduct from "@/types/product";
+import Banner from "@/components/UI/banner";
 
 export default async function Home() {
   const data = await client.fetch(`*[_type == "product"] | order(_createdAt desc) [0...30]{
@@ -24,8 +25,8 @@ export default async function Home() {
       <Hero />
       <Categories />
       <h2 className="text-3xl text-center font-bold mb-8">Latest Products</h2>
-
       <ProductList products={products} />
+      <Banner/>
       </div>
   );
 }

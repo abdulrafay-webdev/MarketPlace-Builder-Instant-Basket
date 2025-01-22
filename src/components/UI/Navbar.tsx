@@ -13,30 +13,40 @@ const Navbar = () => {
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <div className="flex items-center">
-            <Link href={'/'}>
-            <h1 className="sm:text-2xl text-lg font-bold">InstantBasket</h1>
+            <Link href="/">
+              <h1 className="sm:text-2xl text-lg font-bold">InstantBasket</h1>
             </Link>
           </div>
 
+          {/* Search Bar for Desktop */}
+          <form action={'/search'} className="hidden md:flex items-center flex-grow mx-4">
+            <input
+              type="text"
+              name="query"
+              placeholder="Search products..."
+              className="w-full px-4 py-2 rounded-md border text-black border-gray-300 focus:outline-none focus:ring-2 focus:ring-yellow-300"
+            />
+            <button className="ml-2 px-4 py-2 bg-yellow-500 hover:bg-yellow-600 text-white rounded-md">
+              Search
+            </button>
+          </form>
+
           {/* Menu Items for Desktop */}
-          <div className="hidden md:flex items-center space-x-4">
-            <a href="/product" className="hover:text-yellow-300 transition">
-              All Product
-            </a>
-            <a href="/category" className="hover:text-yellow-300 transition">
-              Categories
-            </a>
-            <a href="/cart" className="hover:text-yellow-300 transition">
+          <div className="hidden lg:flex items-center space-x-4">
+            <Link href="/product" className="hover:text-yellow-300 transition">
+              All Products
+            </Link>
+            <Link href="/cart" className="hover:text-yellow-300 transition">
               Cart
-            </a>
-            <a href="/rider" className="hover:text-yellow-300 transition">
+            </Link>
+            <Link href="/rider" className="hover:text-yellow-300 transition">
               Rider Dashboard
-            </a>
+            </Link>
             {/* Clerk User Display */}
             {user ? (
               <div className="flex items-center space-x-4">
                 <p className="text-sm">Hello, {user.fullName || "User"}</p>
-                <UserButton/>
+                <UserButton />
                 <SignOutButton>
                   <button className="px-3 py-2 bg-red-600 hover:bg-red-700 text-white rounded-md transition">
                     Logout
@@ -53,33 +63,12 @@ const Navbar = () => {
           </div>
 
           {/* Mobile Menu Button */}
-          <div className="md:hidden flex">
-
-            {/* Clerk User Display */}
-            {user ? (
-              <div className="flex mx-1">
-                <UserButton/>
-                <p className="px-3 py-2 text-white">Hello, {user.firstName || "User"}</p>
-                <SignOutButton>
-                  <button className="block px-3 py-2 w-fit bg-red-600 hover:bg-red-700 text-white rounded-md transition  text-left">
-                    Logout
-                  </button>
-                </SignOutButton>
-              </div>
-            ) : (
-              <SignInButton>
-                <button className="block px-3 py-2 mx-1 bg-yellow-500 hover:bg-yellow-600 text-white rounded-md transition w-full text-left">
-                  Login
-                </button>
-              </SignInButton>
-            )}
-
+          <div className="lg:hidden flex">
             <button
               onClick={() => setIsOpen(!isOpen)}
               className="inline-flex items-center justify-center p-2 rounded-md text-white hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-green-500 focus:ring-white"
             >
               <span className="sr-only">Open main menu</span>
-              {/* Hamburger Icon */}
               {!isOpen ? (
                 <svg
                   className="h-6 w-6"
@@ -114,24 +103,35 @@ const Navbar = () => {
             </button>
           </div>
         </div>
+        <form action={'/search'} className="pb-2 md:hidden flex items-center justify-center px-2">
+              <input
+                type="text"
+                name="query"
+                placeholder="Search products..."
+                className="w-4/6 px-4 py-2 h-fit rounded-md border text-black border-gray-300 focus:outline-none focus:ring-2 focus:ring-yellow-300"
+              />
+              <button className="w-1/6 -ml-[2%] h-full px-4 py-2 bg-yellow-500 hover:bg-yellow-600 text-white rounded-md">
+                Search
+              </button>
+            </form>
       </div>
+      
 
       {/* Mobile Menu */}
       {isOpen && (
         <div className="md:hidden bg-cyan-600">
           <div className="px-2 pt-2 pb-3 space-y-1">
-            <a href="/" className="block px-3 py-2 rounded-md text-base font-medium hover:bg-green-700">
+            <Link href="/" className="block px-3 py-2 rounded-md text-base font-medium hover:bg-green-700">
               Home
-            </a>
-            <a href="/category" className="block px-3 py-2 rounded-md text-base font-medium hover:bg-green-700">
-              Categories
-            </a>
-            <a href="/cart" className="block px-3 py-2 rounded-md text-base font-medium hover:bg-green-700">
+            </Link>
+            <Link href="/cart" className="block px-3 py-2 rounded-md text-base font-medium hover:bg-green-700">
               Cart
-            </a>
-            <a href="/rider" className="block px-3 py-2 rounded-md text-base font-medium hover:bg-green-700">
+            </Link>
+            <Link href="/rider" className="block px-3 py-2 rounded-md text-base font-medium hover:bg-green-700">
               Rider Dashboard
-            </a>
+            </Link>
+            {/* Mobile Search Bar */}
+            
           </div>
         </div>
       )}

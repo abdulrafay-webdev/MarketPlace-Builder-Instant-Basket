@@ -17,12 +17,3 @@ async function Page() {
 }
 
 export default Page;
-
-
-
-
-    // Riders data
-    // const riders = [
-    //   { riderId: 'ak-001', riderBlock: 'A' },
-    //   { riderId: 'sb-001', riderBlock: 'B' },
-    // ];

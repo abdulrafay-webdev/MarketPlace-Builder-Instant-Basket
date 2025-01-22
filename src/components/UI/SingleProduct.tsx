@@ -1,37 +1,82 @@
+'use client'
+import iProduct from '@/types/product';
 import Image from 'next/image'
-import React from 'react'
+import { useRouter } from 'next/navigation';
+import React, { useState } from 'react'
+import { toast } from 'react-toastify';
+
+interface ProductListProps {
+  products: iProduct[]; // Ensure products is an array of iProduct
+}
+
+function SingleProduct({ products }: ProductListProps) {
+
+   const [showCartButton, setShowCartButton] = useState(false);
+    const router = useRouter();
 
 
-function SingleProduct(props:{price:number,title:string,image:string,description:string,category:string}) {
-    const domePrice:any = (props.price * 1.2).toFixed(2);
+    const handleClick = (product: iProduct) => {
+      const cart = JSON.parse(localStorage.getItem("cart") || "{}");
+  
+      if (cart[product.name]) {
+        cart[product.name] = {
+          ...cart[product.name],
+          quantity: cart[product.name].quantity + 1,
+        };
+      } else {
+        cart[product.name] = { ...product, quantity: 1 };
+      }
+  
+      localStorage.setItem("cart", JSON.stringify(cart));
+      setShowCartButton(true);
+  
+      // Show toast notification
+      toast.success(`${product.name} added to cart!`, {
+        position: "top-right",
+        autoClose: 2000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+      });
+    };
+
+
   return (
-  <div className="container px-5 py-24 mx-auto">
-    <div className="lg:w-4/5 mx-auto flex flex-wrap">
+  <div className="container px-5 lg:py-24 sm:py-10 mx-auto">
+    {products.map((product: iProduct) => {
+    const domePrice:any = (product.price * 1.2).toFixed(2);
+            return (
+    <div key={product._id} className="lg:w-4/5 gap-3  justify-center mx-auto  flex flex-wrap">
     {/* image  */}
       <Image
-        alt={props.title}
-        className="md:w-1/2 md:border-0 border-2 aspect-square w-full lg:h-auto  object-cover object-center rounded"
-        src={props.image}
+        alt={product.name}
+        className="md:w-2/5 md:border-0 border-2 aspect-square w-full lg:h-auto  object-cover object-center rounded"
+        src={product.ProductImage}
         width={700}
         height={700}
       />
-      <div className="md:w-1/2 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0  flex flex-col gap-2 xl:gap-7">
+      <div className="md:w-2/5 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0  flex flex-col gap-2 xl:gap-7">
       {/* category  */}
         <h2 className="text-sm title-font text-gray-500 tracking-widest">
-          {props.category}
+          {product.categoryName}
         </h2>
         {/* title  */}
         <h1 className ="text-gray-900 text-3xl title-font font-medium mb-1">
-          {props.title}
+          {product.name}
+        </h1>
+        {/* quantity  */}
+        <h1 className ="text-gray-900 text-xl title-font font-medium mb-1">
+          ({product.quantity})
         </h1>
         {/* description  */}
         <p className="leading-relaxed">
-        {props.description}
+        {product.description}
         </p>
         {/* price  */}
         <div className='flex gap-4'>
         <span className="title-font font-medium text-2xl text-gray-900">
-           PKR {props.price} /-
+           PKR {product.price} /-
           </span>
         <span className="title-font font-medium text-xl text-gray-700 line-through">
             {domePrice}
@@ -39,15 +84,24 @@ function SingleProduct(props:{price:number,title:string,image:string,description
           </div>
           {/* button  */}
         <div className="flex gap-2 justify-between">
-        <button className=" text-white w-full bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded">
-            Buy Now
-          </button>
-          <button className=" text-white w-full bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded">
+          <button onClick={() => handleClick(product)} className=" text-white w-full bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded">
             Add To Cart
           </button>
         </div>
       </div>
     </div>
+    );
+  })}
+        {showCartButton && (
+        <div className="fixed bottom-4 right-4">
+          <button
+            onClick={() => router.push("/cart")}
+            className="px-6 py-3 text-sm font-semibold text-white bg-green-600 rounded-md shadow-lg hover:bg-green-700 transition-colors"
+          >
+            View Cart
+          </button>
+        </div>
+      )}
   </div>
   )
 }

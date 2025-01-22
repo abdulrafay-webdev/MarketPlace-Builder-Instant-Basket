@@ -1,4 +1,5 @@
 'use client';
+import Link from 'next/link';
 import { useRouter } from 'next/navigation'; // Next.js 13+ ke liye
 import React, { useState } from 'react';
 
@@ -93,9 +94,9 @@ const RiderLogin: React.FC<RiderLoginProps> = ({ rider }) => {
         </button>
         <p className="text-sm text-center text-gray-600 mt-4">
           Join as a rider?{' '}
-          <a href="/" className="text-indigo-500 hover:underline">
+          <Link href="/" className="text-indigo-500 hover:underline">
             Contact Us
-          </a>
+          </Link>
         </p>
       </form>
     </div>
