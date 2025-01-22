@@ -1,7 +1,6 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
-import img from "../../../public/images/golden light.jpg";
 
 function Card(props: {
   slug: string;

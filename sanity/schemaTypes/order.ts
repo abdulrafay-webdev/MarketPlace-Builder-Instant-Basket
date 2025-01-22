@@ -15,6 +15,7 @@ export default {
     { name: "customerName", type: "string", title: "Customer Name" },
     { name: "customerContact", type: "string", title: "Customer Contact" },
     { name: "customerAddress", type: "string", title: "Customer Address" },
+    { name: "TotalPrice", type: "number", title: "Total Price" },
     {
       name: "assignedRider",
       type: "reference",
