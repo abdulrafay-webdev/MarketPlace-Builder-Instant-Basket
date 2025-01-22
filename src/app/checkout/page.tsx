@@ -15,6 +15,7 @@ function page() {
     {items.map((item) => (
       <div key={item._id}>
 <h1>{item._id}</h1>
+<h2>{item.categoryName}</h2>
       </div>
        ))}
     </div>
