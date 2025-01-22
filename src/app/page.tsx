@@ -23,9 +23,7 @@ export default async function Home() {
     <div className="min-h-[70vh]">
       <Hero />
       <Categories />
-      <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-semibold text-gray-800 text-center my-4">
-  Responsive Heading
-</h1>
+      <h2 className="text-3xl text-center font-bold mb-8">Latest Products</h2>
 
       <ProductList products={products} />
       </div>

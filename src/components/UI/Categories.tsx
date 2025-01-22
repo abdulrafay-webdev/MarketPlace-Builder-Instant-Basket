@@ -24,7 +24,7 @@ const CategoryName = await client.fetch(`*[_type == "category"] {
         
         {CategoryName.map((item:any, i:any) => (
           <CarouselItem  key={i} className="md:basis-1/6 lg:basis-1/5 basis-1/6 flex flex-col justify-center items-center w-[20%]">
-        {/* <div className=" group flex flex-col justify-center items-center w-[20%]"> */}
+
             <Link href={`/category/${item.slug}`}>
           <div className="w-20 md:w-32 aspect-square rounded-full overflow-hidden bg-gray-200 hover:scale-105 transform transition-all">
             <Image
@@ -42,7 +42,6 @@ const CategoryName = await client.fetch(`*[_type == "category"] {
                 {item.categoryName}
               </p>
             </div>
-        {/* </div> */}
         </CarouselItem>
         ))}
         
