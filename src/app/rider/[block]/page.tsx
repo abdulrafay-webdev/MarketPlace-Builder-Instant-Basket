@@ -126,6 +126,7 @@ const Page = ({ params }: PageProps) => {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
         {orders.length > 0 ? (
           orders.map((item: Order, i: number) => (
+            
             <div
               key={i}
               className="bg-white rounded-lg shadow-2xl p-5 flex flex-col justify-between"
@@ -139,6 +140,17 @@ const Page = ({ params }: PageProps) => {
               <p className="text-gray-700"><b>Delivery Charges:</b> PKR 90 /-</p>
               <p className="text-gray-700"><b>Total Price:</b> {item.TotalPrice}</p>
               <p className="text-gray-700"><b>Status: </b>{item.status}</p>
+              <p className="text-gray-700"><b>Status: </b>{new Date(item._createdAt).toLocaleString('en-US', {
+                  weekday: 'long',
+                  year: 'numeric',
+                  month: 'long',
+                  day: 'numeric',
+                  hour: 'numeric',
+                  minute: 'numeric',
+                  second: 'numeric',
+                  hour12: true,
+                })}</p>
+
 
               <div className="mt-3">
                 <h3 className="font-semibold text-gray-800">Products:</h3>
