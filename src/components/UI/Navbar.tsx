@@ -58,13 +58,15 @@ const Navbar = () => {
               </div>
             ) : (
               <SignInButton>
-                <button className="px-3 py-2 bg-yellow-500 hover:bg-yellow-600 text-white rounded-md transition">
+                <button className="hidden lg:flex px-3 py-2 bg-yellow-500 hover:bg-yellow-600 text-white rounded-md transition">
                   Login
                 </button>
               </SignInButton>
             )}
           </div>
 
+{/* mobile component  */}
+<div className="flex">
           {/* Clerk User Display */}
           {user ? (
               <div className="flex lg:hidden items-center space-x-4">
@@ -78,7 +80,7 @@ const Navbar = () => {
               </div>
             ) : (
               <SignInButton>
-                <button className="px-3 py-2 bg-yellow-500 hover:bg-yellow-600 text-white rounded-md transition">
+                <button className="lg:hidden flex px-3 py-2 bg-yellow-500 hover:bg-yellow-600 text-white rounded-md transition">
                   Login
                 </button>
               </SignInButton>
@@ -124,16 +126,21 @@ const Navbar = () => {
               )}
             </button>
           </div>
+
+          </div>
+
         </div>
-        <form action={'/search'} className="pb-2 md:hidden flex items-center justify-center px-2">
+        {/* search bar for mobile */}
+        <form action={'/search'} className="pb-2 md:hidden flex items-center justify-center">
               <input
                 type="text"
                 name="query"
                 placeholder="Search products..."
-                className="w-4/6 px-4 py-2 h-fit rounded-md border text-black border-gray-300 focus:outline-none focus:ring-2 focus:ring-yellow-300"
+                className="w-5/6 px-4 py-2 h-fit rounded-md border text-black border-gray-300 focus:outline-none focus:ring-2 focus:ring-yellow-300"
               />
-              <button className="w-1/6 -ml-[2%] h-full px-4 py-2 bg-yellow-500 hover:bg-yellow-600 text-white rounded-md">
+              <button className="w-1/6 -ml-[2%] h-full px-4 py-2 bg-yellow-500 hover:bg-yellow-600 text-white rounded-md flex gap-1 justify-center">
               <SearchIcon/>
+              <p className="hidden sm:block md:hidden" >search</p>
               </button>
             </form>
       </div>
