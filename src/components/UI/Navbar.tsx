@@ -47,7 +47,7 @@ const Navbar = () => {
             </Link>
             {/* Clerk User Display */}
             {user ? (
-              <div className="flex items-center space-x-4">
+              <div className="hidden lg:flex items-center space-x-4">
                 <p className="text-sm">Hello, {user.fullName || "User"}</p>
                 <UserButton />
                 <SignOutButton>
