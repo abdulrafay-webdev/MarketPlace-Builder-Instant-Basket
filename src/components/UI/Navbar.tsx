@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import { useUser, SignInButton, SignOutButton, UserButton } from "@clerk/nextjs"; // Clerk imports
 import Link from "next/link";
+import { FactoryIcon, SearchIcon } from "lucide-react";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -27,7 +28,7 @@ const Navbar = () => {
               className="w-full px-4 py-2 rounded-md border text-black border-gray-300 focus:outline-none focus:ring-2 focus:ring-yellow-300"
             />
             <button className="ml-2 px-4 py-2 bg-yellow-500 hover:bg-yellow-600 text-white rounded-md">
-              Search
+            <SearchIcon/>
             </button>
           </form>
 
@@ -61,6 +62,25 @@ const Navbar = () => {
               </SignInButton>
             )}
           </div>
+
+          {/* Clerk User Display */}
+          {user ? (
+              <div className="flex lg:hidden items-center space-x-4">
+                <p className="text-sm">Hello, {user.fullName || "User"}</p>
+                <UserButton />
+                <SignOutButton>
+                  <button className="px-3 py-2 bg-red-600 hover:bg-red-700 text-white rounded-md transition">
+                    Logout
+                  </button>
+                </SignOutButton>
+              </div>
+            ) : (
+              <SignInButton>
+                <button className="px-3 py-2 bg-yellow-500 hover:bg-yellow-600 text-white rounded-md transition">
+                  Login
+                </button>
+              </SignInButton>
+            )}
 
           {/* Mobile Menu Button */}
           <div className="lg:hidden flex">
@@ -111,7 +131,7 @@ const Navbar = () => {
                 className="w-4/6 px-4 py-2 h-fit rounded-md border text-black border-gray-300 focus:outline-none focus:ring-2 focus:ring-yellow-300"
               />
               <button className="w-1/6 -ml-[2%] h-full px-4 py-2 bg-yellow-500 hover:bg-yellow-600 text-white rounded-md">
-                Search
+              <SearchIcon/>
               </button>
             </form>
       </div>
