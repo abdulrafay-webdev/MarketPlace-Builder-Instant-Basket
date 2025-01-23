@@ -94,7 +94,7 @@ const RiderLogin: React.FC<RiderLoginProps> = ({ rider }) => {
         </button>
         <p className="text-sm text-center text-gray-600 mt-4">
           Join as a rider?{' '}
-          <Link href="/" className="text-indigo-500 hover:underline">
+          <Link target='_blank' href="https://wa.me/923132354942" className="text-indigo-500 hover:underline">
             Contact Us
           </Link>
         </p>

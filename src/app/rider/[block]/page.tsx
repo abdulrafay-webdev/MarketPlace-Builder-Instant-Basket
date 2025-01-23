@@ -24,6 +24,7 @@ interface Order {
   status: string;
   assignedRider: string;
   products: Product[];
+  _createdAt: string; // _createdAt field for sorting
 }
 
 export interface PageProps {
@@ -50,7 +51,8 @@ async function fetchOrders(block: string): Promise<Order[]> {
           name,
           price,
           "imageUrl": image.asset->url
-        }
+        },
+        _createdAt
       }`,
       { block }
     );
@@ -104,7 +106,16 @@ const Page = ({ params }: PageProps) => {
 
   useEffect(() => {
     if (block) {
-      fetchOrders(block).then(setOrders);
+      fetchOrders(block).then((fetchedOrders) => {
+        // Sort the orders by _createdAt field (date & time)
+        const sortedOrders = fetchedOrders.sort((a, b) => {
+          const dateA = new Date(a._createdAt);
+          const dateB = new Date(b._createdAt);
+          return dateB.getTime() - dateA.getTime(); // Sorting in descending order (latest first)
+        });
+
+        setOrders(sortedOrders);
+      });
     }
   }, [block]);
 
@@ -124,6 +135,8 @@ const Page = ({ params }: PageProps) => {
               <p className="text-gray-700"><b>Address:</b> {item.customerAddress}</p>
               <p className="text-gray-700"><b>Contact:</b> {item.customerContact}</p>
               <p className="text-gray-700"><b>Delivery Note:</b> {item.deliveryNote}</p>
+              <p className="text-gray-700 mt-2"><b>Product Price:</b> PKR {item.TotalPrice-90} /-</p>
+              <p className="text-gray-700"><b>Delivery Charges:</b> PKR 90 /-</p>
               <p className="text-gray-700"><b>Total Price:</b> {item.TotalPrice}</p>
               <p className="text-gray-700"><b>Status: </b>{item.status}</p>
 

@@ -2,7 +2,7 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { client } from "../../../sanity/lib/client";
-import { Carousel, CarouselContent, CarouselItem } from "./carousel";
+import { Carousel, CarouselContent, CarouselItem} from "./carousel";
 
 // Define the structure of the category data using TypeScript interface
 interface Category {
@@ -35,7 +35,7 @@ async function Categories() {
             {CategoryName.map((item) => (
               <CarouselItem
                 key={item._id}
-                className="md:basis-1/6 lg:basis-1/5 basis-1/6 flex flex-col justify-center items-center w-[20%]"
+                className="md:basis-1/6 lg:basis-1/5 basis-1/6 flex flex-col justify-center items-center w-[25%]"
               >
                 <Link href={`/category/${item.slug}`}>
                   <div className="w-20 md:w-32 aspect-square rounded-full overflow-hidden bg-gray-200 hover:scale-105 transform transition-all">
