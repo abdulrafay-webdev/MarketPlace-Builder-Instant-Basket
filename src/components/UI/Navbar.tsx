@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import { useUser, SignInButton, SignOutButton, UserButton } from "@clerk/nextjs"; // Clerk imports
 import Link from "next/link";
-import { FactoryIcon, SearchIcon } from "lucide-react";
+import { SearchIcon } from "lucide-react";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
