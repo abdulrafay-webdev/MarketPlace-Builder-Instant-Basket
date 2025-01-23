@@ -35,15 +35,7 @@ function CartPage() {
     updateCart(updatedCart);
   };
 
-  // Update product quantity
-  // const updateQuantity = (productId: string, quantity: number) => {
-  //   const updatedCart = cartItems.map((item) =>
-  //     item._id === productId
-  //       ? { ...item, quantity:string( Math.max(1, quantity)) } // Ensure quantity is a number
-  //       : item
-  //   );
-  //   updateCart(updatedCart);
-  // };
+
   const updateQuantity = (productId: string, quantity: number) => {
     const updatedCart = cartItems.map((item) =>
       item._id === productId
@@ -71,7 +63,7 @@ function CartPage() {
               {cartItems.map((item) => (
                 <div
                   key={item._id}
-                  className="flex items-center bg-white p-4 rounded-lg shadow-md mb-4"
+                  className="flex overflow-hidden items-center bg-white p-4 rounded-lg shadow-md mb-4"
                 >
                   <Image
                     width={200}
@@ -81,26 +73,27 @@ function CartPage() {
                     className="w-24 h-24 rounded object-cover"
                   />
                   <div className="ml-4 flex-grow">
-                    <h2 className="text-lg font-semibold text-gray-800">
+                    <h2 className="sm:text-lg text-sm font-semibold text-gray-800">
                       {item.name}
                     </h2>
-                    <p className="text-sm text-gray-500">{item.categoryName}</p>
+                    <p className="sm:text-sm text-xs text-gray-500">{item.categoryName}</p>
                     <p className="text-sm text-gray-600 mt-1">
                       Price: PKR {item.price}
                     </p>
                   </div>
+                  <div className="flex  gap-2 sm:gap-4 sm:flex-row sm:p-4 p-2 flex-col justify-center items-center">
                   <div className="flex items-center">
                     <button
-                      className="px-3 py-1 bg-gray-200 rounded-l hover:bg-gray-300"
+                      className="sm:px-3 sm:py-1 px-2 py-1 bg-gray-200 rounded-l hover:bg-gray-300"
                       onClick={() =>
                         updateQuantity(item._id, Number(item.quantity) - 1)
                       }
                     >
                       -
                     </button>
-                    <span className="px-4 py-1 border">{item.quantity}</span>
+                    <span className="sm:px-3 sm:py-1 px-2 py-1 border">{item.quantity}</span>
                     <button
-                      className="px-3 py-1 bg-gray-200 rounded-r hover:bg-gray-300"
+                      className="sm:px-3 sm:py-1 px-2 py-1 bg-gray-200 rounded-r hover:bg-gray-300"
                       onClick={() =>
                         updateQuantity(item._id, Number(item.quantity) + 1)
                       }
@@ -118,6 +111,7 @@ function CartPage() {
                     >
                       Remove
                     </button>
+                  </div>
                   </div>
                 </div>
               ))}
