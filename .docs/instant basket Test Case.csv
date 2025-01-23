@@ -1,0 +1,19 @@
+Test Case ID,Test Case Description,Preconditions,Test Steps,Expected Result,Actual Result,Status (Pass/Fail)
+TC001,Before Checkout Verify user login with valid credentials,User is on the signup page,1- enter detail  and click on sign up,User is redirected to the checkout page,user signup and checkout successful,pass
+TC002,Verification for rider dashboard,rider is on rider login form,"1. Enter invalid username or password
+2. Click 'Login' button",if details correct rider redirect to rider dashboard,now rider have access all orders which block I assigned the rider,pass
+TC003,Verify product search functionality,User is on the homepage,"1. Enter a product name in the search bar
+2. Click the 'Search' button",Relevant products are displayed in the search results,the searched product will be delayed,Pass
+TC004,Verify add-to-cart functionality,User has searched for a product,"1. Select a product from the search results
+2. Click 'Add to Cart' button",Product is added to the cart and cart count increases by 1,the product successfully added to cart,Pass
+TC005,Verify order placement,User has items in the cart,"1. Go to the cart page
+2. Click 'Checkout'
+3. Enter delivery details
+4. Click 'Place Order'",Order is placed successfully with an order confirmation message,show the toast to customer order created successfully and the order detail send to rider of this block,Pass
+TC006,Verify block-wise rider assignment,Admin adds a new order,"1. Create an order in the admin panel
+2. Assign it to a block
+3. Check the rider dashboard",The assigned rider sees the order in their dashboard,the rider see only those order where the rider assigned,Pass
+TC007,Verify responsive design,Open the website on different devices,"1. Open the website on a desktop browser
+2. Open the website on a mobile browser",Website adjusts its layout according to the device screen size,in all devices website is responsive,Pass
+TC008,Verify real-time order status updates,User places an order,"1. Place an order as a user
+2. Monitor the order status on the dashboard",Order status updates in real time on both user and rider dashboards,when rider deliver the order the rider will be able to the order status,Pass
