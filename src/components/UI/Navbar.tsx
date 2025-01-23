@@ -3,6 +3,8 @@ import React, { useState } from "react";
 import { useUser, SignInButton, SignOutButton, UserButton } from "@clerk/nextjs"; // Clerk imports
 import Link from "next/link";
 import { SearchIcon } from "lucide-react";
+import Image from "next/image";
+import logo from '../../../public/images/instant logo.png'
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -15,7 +17,7 @@ const Navbar = () => {
           {/* Logo */}
           <div className="flex items-center">
             <Link href="/">
-              <h1 className="sm:text-2xl text-lg font-bold">InstantBasket</h1>
+              <Image className=" h-auto w-32 sm:w-36 " src={logo} alt="Instant Basket" width={200} height={200} />
             </Link>
           </div>
 
@@ -66,7 +68,7 @@ const Navbar = () => {
           {/* Clerk User Display */}
           {user ? (
               <div className="flex lg:hidden items-center space-x-4">
-                <p className="text-sm">Hello, {user.fullName || "User"}</p>
+                <p className="text-sm">Hello, {user.firstName || "User"}</p>
                 <UserButton />
                 <SignOutButton>
                   <button className="px-3 py-2 bg-red-600 hover:bg-red-700 text-white rounded-md transition">

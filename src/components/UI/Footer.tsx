@@ -1,15 +1,20 @@
+import Image from "next/image";
 import Link from "next/link";
 import React from "react";
+import logo from '../../../public/images/instant logo second.png'
 
 const Footer = () => {
   return (
     <footer className="bg-gradient-to-r from-gray-800 via-gray-900 to-black text-white py-8">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 items-start sm:grid-cols-2 md:grid-cols-4 gap-8">
           {/* Logo and About */}
           <div>
-            <h3 className="text-xl font-semibold mb-4">InstantBasket</h3>
-            <p className="text-sm">
+            {/* <h3 className="text-xl font-semibold mb-4">InstantBasket</h3> */}
+            <Link href="/" className="flex justify-center sm:justify-start">
+              <Image className=" sm:-mt-[25%]" src={logo} alt="Instant Basket" width={200} height={200} />
+            </Link>
+            <p className="text-sm sm:-mt-[5%]">
               Your one-stop platform for shopping and logistics management. We ensure convenience and efficiency in every order!
             </p>
           </div>
@@ -102,9 +107,9 @@ const Footer = () => {
           {/* Contact */}
           <div>
             <h4 className="text-lg font-semibold mb-4">Contact Us</h4>
-            <p className="text-sm">Email: support@instantbasket.com</p>
-            <p className="text-sm">Phone: +123 456 7890</p>
-            <p className="text-sm">Address: 123 Main Street, City, Country</p>
+            <p className="text-sm">Email: abdullrrafay@gmail.com</p>
+            <p className="text-sm">Phone: +92 313 2354942</p>
+            <p className="text-sm">Address: Near Naya Nazimabad Road, North Nazimabad, Karachi, Pakistan</p>
           </div>
         </div>
 
