@@ -1,4 +1,4 @@
-'use client'
+'use client';
 import React from "react";
 import styled from "styled-components";
 
@@ -7,7 +7,11 @@ const Loading = () => {
     <StyledWrapper className="h-[80vh] w-full flex justify-center items-center">
       <section className="loader">
         {[...Array(5)].map((_, i) => (
-          <div className="slider" style={{ "--i": i }} key={i}></div>
+          <div
+            className="slider"
+            key={i}
+            style={{ "--i": i } as React.CSSProperties} // Explicitly cast to React.CSSProperties
+          ></div>
         ))}
       </section>
     </StyledWrapper>
@@ -67,5 +71,3 @@ const StyledWrapper = styled.div`
 `;
 
 export default Loading;
-
-
