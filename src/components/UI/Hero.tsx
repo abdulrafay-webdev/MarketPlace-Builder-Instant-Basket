@@ -1,12 +1,14 @@
 import Link from 'next/link'
 import React from 'react'
+import Image from 'next/image'
+import hero from '../../../public/images/hero.webp'
 
 function Hero() {
   return (
     <div
   className="hero max-h-[60vh] min-h-[40vh]"
   style={{
-    backgroundImage: "url(https://img.daisyui.com/images/stock/photo-1507358522600-9f71e620c44e.webp)",
+    backgroundImage: "url(https://le-cdn.hibuwebsites.com/dad20509895d4607937a951f623b7ef7/dms3rep/multi/opt/Hero01-1920w.jpg)",
   }}>
   <div className="hero-overlay bg-opacity-60"></div>
   <div className="hero-content text-neutral-content text-center">
