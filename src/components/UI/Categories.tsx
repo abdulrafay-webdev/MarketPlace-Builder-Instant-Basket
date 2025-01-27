@@ -28,9 +28,8 @@ async function Categories() {
 
   return (
     <div className="text-center py-10 container mx-auto overflow-hidden">
-      <div className="flex justify-around  mb-8">
+      <div className="flex justify-center  mb-8">
       <h2 className="text-3xl font-bold">Our Categories</h2>
-      <Button><Link href={'/category'}>view all</Link></Button>
       </div>
       <div className="flex items-center justify-center sm:gap-8 gap-4">
         {/* Category Circle Carousel */}
@@ -62,6 +61,7 @@ async function Categories() {
           </CarouselContent>
         </Carousel>
       </div>
+      <Button className="my-2" ><Link href={'/category'}>view all</Link></Button>
     </div>
   );
 }
