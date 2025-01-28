@@ -133,6 +133,7 @@ const Page = ({ params }: PageProps) => {
             >
               <h2 className="text-xl font-bold text-gray-800">{item.customerName}</h2>
               <p className="text-gray-700"><b> Order ID: </b>{item.orderId}</p>
+              <p className="text-gray-700"><b> User ID: </b>{item.paymentId}</p>
               <p className="text-gray-700"><b>Address:</b> {item.customerAddress}</p>
               <p className="text-gray-700"><b>Contact:</b> {item.customerContact}</p>
               <p className="text-gray-700"><b>Delivery Note:</b> {item.deliveryNote}</p>
